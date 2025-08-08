@@ -13,10 +13,72 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 <main>
-			<h1 style="text-align: center;">Welcome</h1>
- 				<a href="https://globallyconnect.tjlink.me/" target="_blank" style="display: inline-block;">
-  				<img src="/Globe.png" alt="Globally Connected to Homebase Link" style="clip-path: polygon(0 0, 100% 0%, 50% 100%, 0% 100%);">
-				</a>
+			<style>
+    h1 {
+      height: 100vh;           /* fill the viewport vertically */
+      margin: 0;
+      display: flex;           /* use flexbox */
+      justify-content: center; /* center horizontally */
+      align-items: center;     /* center vertically */
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+  .sliver1 { transform-origin: top left; }
+.sliver2 { transform-origin: top right; }
+.sliver3 { transform-origin: bottom left; }
+.sliver4 { transform-origin: bottom right; }
+
+.sliver {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s ease, clip-path 0.4s ease;
+}
+
+.sliver1 { top: 0; left: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.sliver2 { top: 0; right: 0; clip-path: polygon(100% 0, 100% 100%, 0 0); }
+.sliver3 { bottom: 0; left: 0; clip-path: polygon(0 100%, 100% 100%, 0 0); }
+.sliver4 { bottom: 0; right: 0; clip-path: polygon(100% 100%, 100% 0, 0 100%); }
+
+.sliver img {
+  width: 200%;
+  height: 200%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  transform-origin: center center;
+  transform: scale(1);
+}
+
+.sliver:hover {
+  clip-path: none;
+  transform: scale(2);
+  z-index: 10;
+}
+
+.sliver:hover img {
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+</style>
+
+<div class="container">
+  <a href="https://globallyconnect.tjlink.me/" class="sliver sliver1">
+    <img src="/Globe.png" alt="Globally Connected to Homebase Link" />
+  </a>
+  <a href="https://newmexico.org/" class="sliver sliver2">
+    <img src="NewMFlag.jpg" alt="New Mexico" />
+  </a>
+  <a href="https://tylerjacksongit.github.io/rs-clicker/" class="sliver sliver3">
+    <img src="RS.png" alt="laugh" />
+  </a>
+  <a href="http://ruin.com/" class="sliver sliver4">
+    <img src="ruins.jpeg" alt="LOL" />
+  </a>
+</div>
+
+<h1>Welcome</h1>
 </main>
 		<Footer />
 	</body>
