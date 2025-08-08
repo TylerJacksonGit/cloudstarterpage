@@ -7,79 +7,113 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-<main>
-			<style>
-    h1 {
-      height: 100vh;           /* fill the viewport vertically */
-      margin: 0;
-      display: flex;           /* use flexbox */
-      justify-content: center; /* center horizontally */
-      align-items: center;     /* center vertically */
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
-  .sliver1 { transform-origin: top left; }
-.sliver2 { transform-origin: top right; }
-.sliver3 { transform-origin: bottom left; }
-.sliver4 { transform-origin: bottom right; }
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      main {
+        padding: 1em;
+        padding-top: 2em;    /* space below header */
+        padding-bottom: 8em; /* space for footer */
+        max-width: 800px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        position: relative; /* to contain absolute slivers */
+        height: 400px; /* fixed height so absolute children can position */
+      }
 
-.sliver {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.4s ease, clip-path 0.4s ease;
-}
+      h1 {
+        height: 100vh; /* if you want full viewport height for header text */
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
 
-.sliver1 { top: 0; left: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
-.sliver2 { top: 0; right: 0; clip-path: polygon(100% 0, 100% 100%, 0 0); }
-.sliver3 { bottom: 0; left: 0; clip-path: polygon(0 100%, 100% 100%, 0 0); }
-.sliver4 { bottom: 0; right: 0; clip-path: polygon(100% 100%, 100% 0, 0 100%); }
+      .container {
+        position: relative; /* container for absolutely positioned slivers */
+        width: 100%;
+        height: 100%;
+      }
 
-.sliver img {
-  width: 200%;
-  height: 200%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-  transform-origin: center center;
-  transform: scale(1);
-}
+      .sliver {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.4s ease, clip-path 0.4s ease;
+      }
 
-.sliver:hover {
-  clip-path: none;
-  transform: scale(2);
-  z-index: 10;
-}
+      .sliver1 {
+        top: 0;
+        left: 0;
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+        transform-origin: top left;
+      }
+      .sliver2 {
+        top: 0;
+        right: 0;
+        clip-path: polygon(100% 0, 100% 100%, 0 0);
+        transform-origin: top right;
+      }
+      .sliver3 {
+        bottom: 0;
+        left: 0;
+        clip-path: polygon(0 100%, 100% 100%, 0 0);
+        transform-origin: bottom left;
+      }
+      .sliver4 {
+        bottom: 0;
+        right: 0;
+        clip-path: polygon(100% 100%, 100% 0, 0 100%);
+        transform-origin: bottom right;
+      }
 
-.sliver:hover img {
-  width: 100%;
-  height: 100%;
-  transform: scale(1);
-</style>
+      .sliver img {
+        width: 200%;
+        height: 200%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+        transform-origin: center center;
+        transform: scale(1);
+      }
 
-<div class="container">
-  <a href="https://globallyconnect.tjlink.me/" class="sliver sliver1">
-    <img src="/Globe.png" alt="Globally Connected to Homebase Link" />
-  </a>
-  <a href="https://newmexico.org/" class="sliver sliver2">
-    <img src="NewMFlag.jpg" alt="New Mexico" />
-  </a>
-  <a href="https://tylerjacksongit.github.io/rs-clicker/" class="sliver sliver3">
-    <img src="RS.png" alt="laugh" />
-  </a>
-  <a href="http://ruin.com/" class="sliver sliver4">
-    <img src="ruins.jpeg" alt="LOL" />
-  </a>
-</div>
+      .sliver:hover {
+        clip-path: none;
+        transform: scale(2);
+        z-index: 10;
+      }
 
-<h1>Welcome</h1>
-</main>
-		<Footer />
-	</body>
+      .sliver:hover img {
+        width: 100%;
+        height: 100%;
+        transform: scale(1);
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+
+    <main>
+      <h1>Welcome</h1>
+      <div class="container">
+        <a href="https://globallyconnect.tjlink.me/" class="sliver sliver1">
+          <img src="/Globe.png" alt="Globally Connected to Homebase Link" />
+        </a>
+        <a href="https://newmexico.org/" class="sliver sliver2">
+          <img src="/NewMFlag.jpg" alt="New Mexico" />
+        </a>
+        <a href="https://tylerjacksongit.github.io/rs-clicker/" class="sliver sliver3">
+          <img src="/RS.png" alt="laugh" />
+        </a>
+        <a href="http://ruin.com/" class="sliver sliver4">
+          <img src="/ruins.jpeg" alt="LOL" />
+        </a>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
 </html>
