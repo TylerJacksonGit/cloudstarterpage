@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Journal | Across Technical Time</title>
+    <meta name="description" content="Thoughts on technical fronts and uses cases in time.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top-Left Bird -->
+    <svg class="corner-bird bird-tl" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 10,40 Q 25,10 50,40 Q 75,10 90,40" fill="none" stroke="var(--accent-glow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <!-- Main Navigation Overlay (Absolute/Fixed) -->
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link">Portfolio</a>
+        <span class="nav-separator">|</span>
+        <a href="blog.html" class="nav-link active-nav">A Journal</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="scroll-container">
+        <!-- Header: The Journal Entrance -->
+        <header class="section header-section active" style="min-height: 50vh;">
+            <div class="content-wrapper">
+                <h1>A Journal</h1>
+                <p>Across Technical Time</p>
+                <div class="scroll-prompt" style="margin-top: 2rem;">
+                    <div class="prompt-line"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Horizontal Line Separator -->
+        <div class="horizontal-line-wrapper">
+            <div class="horizontal-line"></div>
+        </div>
+
+        <!-- Body Section 1: Blog Entries List -->
+        <section class="section body-section" id="blog-list" style="align-items: flex-start;">
+            <div class="content-wrapper blog-wrapper">
+                
+                <!-- Blog Entry -->
+                <article class="blog-entry">
+                    <span class="blog-date">March 17, 2026</span>
+                    <h2 class="blog-title"><a href="automation_security.html">Documents and Automation Security</a></h2>
+                    <p class="blog-excerpt">Out of the age of Information, steps into the age of Automation. What can be done about securing documents in a digital age?</p>
+                    <a href="automation_security.html" class="read-more">Read Entry <span class="arrow">→</span></a>
+                </article>
+
+                <div class="horizontal-line-wrapper blog-separator">
+                    <div class="horizontal-line"></div>
+                </div>
+
+                <!-- Blog Entry -->
+                <article class="blog-entry">
+                    <span class="blog-date">March 20, 2026</span>
+                    <h2 class="blog-title"><a href="correct_the_human.html">Correct the Human</a></h2>
+                    <p class="blog-excerpt">How many mistakes come from human generated content from games of telephone? The he said she said of the document world and what is truth.</p>
+                    <a href="correct_the_human.html" class="read-more">Read Entry <span class="arrow">→</span></a>
+                </article>
+				<!---------------------
+                <div class="horizontal-line-wrapper blog-separator">
+                    <div class="horizontal-line"></div>
+                </div>
+				--------------------------->
+
+                <!------------------- Blog Entry 
+                <article class="blog-entry">
+                    <span class="blog-date">January 15, 2026</span>
+                    <h2 class="blog-title"><a href="#">Scroll-Driven Atmosphere</a></h2>
+                    <p class="blog-excerpt">Moving beyond static backgrounds. Implementing a fade-and-slide gradient that bleeds deep sky blue into a dark forest base as the user explores the content.</p>
+                    <a href="#" class="read-more">Read Entry <span class="arrow">→</span></a>
+                </article>
+	Uncomment for new article			----------------->
+            </div>
+        </section>
+
+        <!-- Dynamic Horizontal Line Separator -->
+        <div class="horizontal-line-wrapper">
+            <div class="horizontal-line"></div>
+        </div>
+
+                <!-- Footer: The Deep Ground -->
+        <footer class="section footer-section" id="contact">
+            <div class="content-wrapper">
+                <h2>Reach Tyler Today</h2>
+                <a href="mailto:tylerjacksoncontact@gmail.com" class="contact-link">tylerjacksoncontact@gmail.com</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bottom-Right Bird -->
+    <svg class="corner-bird bird-br" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 10,40 Q 25,10 50,40 Q 75,10 90,40" fill="none" stroke="var(--accent-glow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,409 @@
+/* 1. Visual Identity & Palette */
+:root {
+    --primary-base: #0B1A13; /* Deep Forest / Dark Green */
+    --accent-glow: #87CEEB; /* Sky Blue / Cyan Glow (Alternative: #A0D2EB) */
+    --text-light: #E0F2E9; /* Soft light green-white for readable text */
+    --text-muted: rgba(224, 242, 233, 0.7);
+    --line-thickness: 1px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--primary-base);
+    color: var(--text-light);
+    overflow-x: hidden;
+    /* Full-Viewport Fade-and-Slide background implementation base */
+    background: linear-gradient(to bottom, var(--primary-base) 0%, var(--primary-base) 100%);
+    background-attachment: fixed;
+    transition: background 1s ease-out;
+}
+
+/* Base Gradient overlay shifting */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Richer sky blue bleed */
+    background: linear-gradient(to top, rgba(135, 206, 235, 0.4) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+    /* We map scroll 0->100 to translateY 100%->0% */
+    transform: translateY(calc(100% - var(--scroll-percent, 0%)));
+    pointer-events: none;
+    z-index: -1;
+}
+
+body.scrolled::before {
+    opacity: 1;
+}
+
+/* 2. Core Design Pillars: "Two-Bump" Motif */
+.corner-bird {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    z-index: 100;
+    pointer-events: none;
+    transition: transform 0.3s ease-out;
+}
+
+.bird-tl {
+    top: 40px;
+    left: 40px;
+}
+
+.bird-br {
+    bottom: 40px;
+    right: 40px;
+    transform: scale(-1, -1); /* Flips it structurally to face corner properly if desired, or keep upright */
+}
+
+/* Subtle flapping animation tied to scroll */
+@keyframes flap {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(0.6); }
+    100% { transform: scaleY(1); }
+}
+
+.flap-action path {
+    animation: flap 0.4s ease-in-out;
+    transform-origin: center;
+}
+
+/* 5. Content Layout */
+.scroll-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10vh 5vw;
+    position: relative;
+    opacity: 0.2;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content-wrapper {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Typography */
+h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+h2 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+}
+
+p {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Scroll Prompt */
+.scroll-prompt {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0.6;
+}
+
+.scroll-prompt span {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.prompt-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--accent-glow), transparent);
+}
+
+/* Links List */
+.portfolio-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.portfolio-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.portfolio-links a:hover {
+    color: var(--accent-glow);
+    transform: translateX(10px);
+}
+
+.arrow {
+    font-size: 0.8em;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    color: var(--accent-glow);
+}
+
+.portfolio-links a:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.contact-link {
+    display: inline-block;
+    color: var(--accent-glow);
+    text-decoration: none;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+    padding-bottom: 0.2rem;
+}
+
+.contact-link:hover {
+    border-color: var(--accent-glow);
+}
+
+/* The Horizontal Line Strategy */
+.horizontal-line-wrapper {
+    width: 100%;
+    height: var(--line-thickness);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.horizontal-line {
+    width: 0%;
+    height: 100%;
+    background-color: var(--accent-glow);
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.horizontal-line.grow {
+    width: 100%;
+}
+
+/* 6. Navigation Overlay */
+.main-nav {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    background: rgba(11, 26, 19, 0.6);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(135, 206, 235, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active-nav {
+    color: var(--accent-glow);
+}
+
+.nav-separator {
+    color: var(--text-muted);
+    opacity: 0.5;
+    font-weight: 300;
+}
+
+/* 7. Blog Layout Specifics */
+.blog-wrapper {
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.blog-entry {
+    margin: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.blog-date {
+    font-size: 0.9rem;
+    color: var(--accent-glow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.blog-title {
+    margin-bottom: 0.5rem;
+}
+
+.blog-title a {
+    text-decoration: none;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.blog-title a:hover {
+    color: var(--accent-glow);
+}
+
+.blog-excerpt {
+    margin: 0;
+    margin-bottom: 1.5rem;
+}
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--accent-glow);
+    padding-bottom: 0.2rem;
+    align-self: flex-start;
+    transition: color 0.3s ease, gap 0.3s ease;
+}
+
+.read-more:hover {
+    color: var(--accent-glow);
+    gap: 0.8rem;
+}
+
+.read-more .arrow {
+    opacity: 1;
+    transform: none;
+    transition: transform 0.3s ease;
+}
+
+.read-more:hover .arrow {
+    transform: translateX(5px);
+}
+
+.blog-separator {
+    opacity: 0.3; /* Softer lines between blog posts */
+    margin: 2rem 0;
+}
+
+/* 8. Individual Article Layout */
+.article-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.article-header h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.1;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.article-wrapper {
+    max-width: 680px; /* Optimal reading width */
+    margin: 0 auto;
+    text-align: left;
+}
+
+.article-wrapper p {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+.article-wrapper a {
+    color: var(--accent-glow);
+    text-decoration: none;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 1px 0 rgba(135, 206, 235, 0.4);
+}
+
+.article-wrapper a:hover {
+    box-shadow: 0 1px 0 rgba(135, 206, 235, 1);
+}
+
+.article-wrapper h2 {
+    font-size: 2rem;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-glow);
+    text-align: left;
+}
+
+.back-link-wrapper {
+    margin-top: 6rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .corner-bird {
+        width: 40px;
+        height: 40px;
+    }
+    .bird-tl {
+        top: 20px;
+        left: 20px;
+    }
+    .bird-br {
+        bottom: 20px;
+        right: 20px;
+    }
+    .section {
+        padding: 5vh 8vw;
+    }
+}
